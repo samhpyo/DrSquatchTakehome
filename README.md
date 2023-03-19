@@ -40,6 +40,7 @@ npm run build
     - src/
         - components/
         -- Card.vue
+        -- Search.vue
     - App.vue
 - Layout should be responsive
     - Phones and Tablets to have one column
