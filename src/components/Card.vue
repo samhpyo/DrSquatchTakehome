@@ -3,7 +3,7 @@
     <img class="Image" :src="this.bundle.imageSrc" />
     <p class="Name">{{ this.bundle.title }}</p>
     <div class="Prices" v-if="this.bundle.originalPrice == this.bundle.price">
-      <span class="Price">${{ this.bundle.price / 100 }}</span>
+      <span class="PriceOnly">${{ this.bundle.price / 100 }}</span>
     </div>
     <div class="Prices" v-else>
       <span class="OriginalPrice">${{ this.bundle.originalPrice / 100 }}</span
@@ -21,7 +21,7 @@
     <img class="ImageMobile" :src="this.bundle.imageSrc" />
     <p class="Name">{{ this.bundle.title }}</p>
     <div class="Prices" v-if="this.bundle.originalPrice == this.bundle.price">
-      <span class="Price">${{ this.bundle.price / 100 }}</span>
+      <span class="PriceOnly">${{ this.bundle.price / 100 }}</span>
     </div>
     <div class="Prices" v-else>
       <span class="OriginalPrice">${{ this.bundle.originalPrice / 100 }}</span
@@ -41,11 +41,6 @@
 <script>
 export default {
   name: 'BundleCard',
-  data() {
-    return {
-      includedItems: ''
-    }
-  },
   props: {
     bundle: Object,
     device: String
@@ -55,8 +50,8 @@ export default {
 <style>
 .Card {
   margin: 15px;
-  width: 500px;
-  height: 700px;
+  width: 460px;
+  height: 650px;
   padding: 20px;
   box-sizing: border-box;
   border: 1px solid gray;
@@ -72,14 +67,13 @@ export default {
 }
 .CardMobile {
   margin: 15px;
-  width: 400px;
+  width: 410px;
   height: 500px;
   padding: 20px;
   box-sizing: border-box;
   border: 1px solid gray;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 1fr;
   grid-template-areas:
     'ImageMobile'
     'Name'
@@ -88,11 +82,12 @@ export default {
     'Products';
 }
 .ImageMobile {
+  margin-left: 50px;
   height: 250px;
 }
 .Image {
   height: 400px;
-  margin-bottom: -20px;
+  margin-left: -5px;
 }
 .Name {
   font-size: 30px;
@@ -105,6 +100,12 @@ export default {
   text-decoration: line-through;
 }
 .Price {
+  margin-left: -40px;
+  font-size: 20px;
+  font-weight: 600;
+  color: green;
+}
+.PriceOnly{
   font-size: 20px;
   font-weight: 600;
   color: green;

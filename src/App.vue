@@ -1,10 +1,11 @@
 <template>
   <div class="App">
     <div class="Header">
-      <template v-for="(scent, index) in scents" :key="index">
+      <CheckboxSearch @updateScents="filterScents" :scents="scents" />
+      <!-- <template v-for="(scent, index) in scents" :key="index">
         <input type="checkbox" v-model="selectedScents" :value="scent" class="CheckBox" />
         <span class="FilterName">{{ scent.charAt(0).toUpperCase() + scent.slice(1) }}</span>
-      </template>
+      </template> -->
     </div>
     <div class="Bundles" v-if="device === `Desktop`">
       <div v-for="bundle in filteredScent" :key="bundle.handle">
@@ -21,10 +22,12 @@
 
 <script>
 import BundleCard from '@/components/Card.vue'
+import CheckboxSearch from '@/components/Search.vue'
 export default {
   name: 'App',
   components: {
-    BundleCard
+    BundleCard,
+    CheckboxSearch
   },
   data() {
     return {
@@ -46,6 +49,10 @@ export default {
     }
   },
   methods: {
+    filterScents(array) {
+      // console.log('array', array)
+      this.selectedScents = array
+    },
     screenResize() {
       let size = window.innerWidth
       if (size < 481) {
@@ -141,25 +148,19 @@ export default {
 </script>
 <style>
 .Header {
+  position: flex;
+  top: 0px;
   margin-top: 20px;
   margin-left: 20px;
 }
 .Bundles {
-  margin-top: 30px;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .BundlesMobile {
-  margin-top: 30px;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr;
-}
-.FilterName {
-  font-size: 25px;
-  font-weight: 500;
-  padding-right: 20px;
-  padding-left: 5px;
 }
 </style>
